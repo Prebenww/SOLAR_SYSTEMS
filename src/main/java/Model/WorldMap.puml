@@ -1,0 +1,129 @@
+@startuml
+
+/'
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+'/
+
+
+/'List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList'/
+
+
+/' Some collaborations with Dennis Olsen, but he really only showed me the syntax for PlantUML '/
+Animal <|-- Invertebrate: < is a
+Animal <|-- Amphibian: < is a
+Animal <|-- Birds: < is a
+Observation o-- Animal: > has
+Observation o-- Location: > has
+Location o-- Planet: > has
+Location o-- Biome: > has
+Birds <|-- BlackHawk: < is a
+Amphibian <|-- PythonSnake: < is a
+Amphibian <|-- PacmanFrog: < is a
+Invertebrate <|-- LandSnail: < is a
+
+
+abstract class Animal {
+  - name: String
+  - scienceName: String
+  - avgLifespan: int
+  - biome: ArrayList<Biome>
+  + eat(int, double): void
+        }
+
+class Observation {
+ - id: int
+ - name: String
+ - animal: Animal
+ - location: Location
+ - date: String
+ - amount: int
+ - picture: String
+ - comments: String
+}
+
+class Location {
+ - name: String
+ - longitude: double
+ - latitude: double
+ - planet: Planet
+ - biome: ArrayList<biome>
+}
+
+class Biome {
+ - name: String
+ - type: String
+}
+
+abstract class Invertebrate {
+ - Spine: boolean
+}
+
+class LandSnail {
+  - endangered: boolean
+  - family: String
+}
+
+abstract class Amphibian {
+  - needWater: boolean
+}
+
+class PacmanFrog {
+ - endangered: boolean
+ - family: String
+}
+
+class PythonSnake {
+  - endangered: boolean
+  - family: String
+  - poison: boolean
+}
+
+abstract class Birds{
+ - canFly: boolean
+ - color: String
+}
+
+class BlackHawk {
+ - endangered: boolean
+ - type: String
+ - family: String
+}
+
+class ObservationRepository  {
+  - endangered: boolean
+  - type: String
+  - family: String
+  + allObservations():
+  + fetchOneObservation(String):
+  + createObservation(String, Animal, LocalDate, Location, int, String , String):
+  + updateObservation(String, Animal, LocalDateLocation, int, String, String):
+  + deleteObservation(String):
+
+}
+
+class ObservationController {
+ + allObservations(Context): void
+ + fetchOneObservation(Context): void
+}
+
+class Planet {
+ - name: String
+ - planetSystem: String
+ - biomes: ArrayList<Biome>
+}
+
+
+class Biome {
+
+}
+
+
+@enduml
